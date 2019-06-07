@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            margin: 50px auto 0 auto;
+            border-collapse: collapse;
+            text-align: center;
+            vertical-align: center;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            width: 100px;
+            height: 30px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js">
+
+    </script>
+</head>
+<body>
+    <table>
+    </table>
+    <script>
+        /*document.addEventListener("DOMContentLoaded",function () {
+            let  table=document.querySelector("table");
+            let tbody=document.createElement("tbody");
+            table.appendChild(tbody);
+            let header = ["empNo", "empName", "job", "mgr", "hireDate", "sal", "com", "deptNo"];
+            let headerTr=document.createElement("tr");
+            tbody.appendChild(headerTr);
+            for (let i=0;i<header.length;i++) {
+                let td=document.createElement("td");
+                td.textContent=header[i];
+                headerTr.appendChild(td);
+            }
+
+            let resquestUrl="https://java201903.github.io/web-demo/data/empList.json";
+            let resquest=new XMLHttpRequest();
+            resquest.open("GET",resquestUrl);
+            resquest.responseType="json";
+            resquest.send();
+
+            resquest.onload=function () {
+                let empList=resquest.response;
+                let dataTr;
+                for(let i=0;i<empList.length;i++){
+                    dataTr=document.createElement("tr");
+                    tbody.appendChild(dataTr);
+                    let dataTd;
+                    for (let j=0;j<header.length;j++) {
+                        dataTd=document.createElement("td");
+                        dataTr.appendChild(dataTd);
+                        let emp=empList[i];
+                        let property = header[j];
+                        dataTd.textContent=emp[property];
+                    }
+                }
+            };
+        })*/
+
+        $(function () {
+            /*let  table=document.querySelector("table");
+            let tbody=document.createElement("tbody");
+            table.appendChild(tbody);*/
+
+            let $tbody=$("<tbody></tbody>");
+            $("table").append($tbody);
+
+            let header = ["empno", "ename", "job", "mgr", "hiredate", "sal", "com", "deptno"];
+            /*let headerTr=document.createElement("tr");
+            tbody.appendChild(headerTr);*/
+
+            let $headerTr=$("<tr></tr>");
+            $headerTr.appendTo($tbody);
+            for (let i=0;i<header.length;i++) {
+                /*let td=document.createElement("td");*/
+                let $td=$("<td></td>");
+                $td.append(header[i])
+                /*td.textContent=header[i];
+                headerTr.appendChild(td);*/
+                $td.appendTo($headerTr);
+            }
+
+            let resquestUrl="servlet/EmpServlet";
+            $.ajax({
+                url:resquestUrl,
+                method:"Get",
+                dataType:"json",
+                success:function (response) {
+                    let empList=response;
+                    /*let $dataTr;*/
+                    for(let i=0;i<empList.length;i++){
+                        /*dataTr=document.createElement("tr");
+                        tbody.appendChild(dataTr);*/
+
+                       let $dataTr=$("<tr></tr>");
+                        $dataTr.appendTo($tbody);
+                        /*let $dataTd;*/
+                        for (let j=0;j<header.length;j++) {
+                            /*dataTd=document.createElement("td");
+                            dataTr.appendChild(dataTd);*/
+
+                           let $dataTd=$("<td></td>");
+                            $dataTd.appendTo($dataTr);
+
+                            let emp=empList[i];
+                            let property = header[j];
+                            /*dataTd.textContent=emp[property];*/
+                            let $text=emp[property];
+                            $dataTd.append($text);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

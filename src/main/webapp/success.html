@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script  type="text/javascript">
+        window.onload=function() {
+            let time=5;
+            let timeEle=document.getElementById("secound");
+            let timer=setInterval(function () {
+                timeEle.innerHTML=time;
+                time--;
+                if(time==0){
+                    clearInterval(timer);
+                    location.href="http://www.baidu.com";
+                }
+
+            },1000);
+        }
+    </script>
+</head>
+<body>
+     恭喜你，注册成功，<span id="secound" style="color: red">5</span>秒钟后跳转，如不跳转，请点击<a href="http://www.baidu.com">这里</a>
+</body>
+</html>
